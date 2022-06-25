@@ -1,0 +1,143 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{   int i,j,q,p,Final=0,arr[9]={0,0,0,0,0,0,0,0,0};
+    int choice;
+
+    FILE *filepointer;
+    filepointer = fopen("Reciept.txt","w");
+
+    printf("--------------------------------------------------------------\n");
+    printf("----------------------------Shop------------------------------");
+    printf("");
+    printf("\nItem List:");
+    printf("\n1.Lays chips\n2.Kurkure chips\n3.Bingo chips\n4.Hide and seek biscuit\n5.Good day biscuit\n6.Parle G\n7.Unibic cookies\n8.Mixture(100g)\n9.Bhujia(100g)\n");
+    printf("---------------------------------------------------------------");
+    while(1){
+        printf("\nEnter serial number of item to be added to kart: ");
+        scanf("%d",&i);
+        if(i<1){printf("Enter valid product number!\n");continue;}
+        if(i>9){printf("Enter valid product number!\n");continue;}
+        printf("Quantity : ");
+        scanf("%d",&j);
+        for(q=0;q<j;q++)
+        {
+            switch(i){
+                case 1:
+                    arr[0]+=1;
+                    break;
+                case 2:
+                    arr[1]+=1;
+                    break;
+                case 3:
+                    arr[2]+=1;
+                    break;
+                case 4:
+                    arr[3]+=1;
+                    break;
+                case 5:
+                    arr[4]+=1;
+                    break;
+                case 6:
+                    arr[5]+=1;
+                    break;
+                case 7:
+                    arr[6]+=1;
+                    break;
+                case 8:
+                    arr[7]+=1;
+                    break;
+                case 9:
+                    arr[8]+=1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        printf("Want to continue adding to kart[1 for Yes/0 for No]: ");
+        scanf("%d",&choice);
+        if(choice==0){break;}
+        else{continue;}
+    }
+    fputs("---------Receipt--------\n",filepointer);
+    printf("\n---------------------KART--------------------");
+    printf("\n\*Cost per item in bracket");
+    for(p=0;p<9;p++){
+        if(arr[p]>0){
+            switch(p){
+                case 0:
+                    printf("\nLays chips(30): %d",arr[p]);
+                    Final+=arr[p]*30;
+                    char num1[10];
+                    sprintf(num1,"Lays chips:%d\n",arr[p]);
+                    fputs(num1,filepointer);
+
+                    break;
+                case 1:
+                    printf("\nKurkure chips(30): %d",arr[p]);
+                    Final+=arr[p]*30;
+                    char num2[10];
+                    sprintf(num2,"Kurkure chips:%d\n",arr[p]);
+                    fputs(num2,filepointer);
+                    break;
+                case 2:
+                    printf("\nBingo chips(30): %d",arr[p]);
+                    Final+=arr[p]*30;
+                    char num3[10];
+                    sprintf(num3,"Bingo chips:%d\n",arr[p]);
+                    fputs(num3,filepointer);
+                    break;
+                case 3:
+                    printf("\nHided and seek biscuit(30): %d",arr[p]);
+                    Final+=arr[p]*30;
+                    char num4[10];
+                    sprintf(num4,"Hide and seek:%d\n",arr[p]);
+                    fputs(num4,filepointer);
+                    break;
+                case 4:
+                    printf("\nGoodday biscuit(15): %d",arr[p]);
+                    Final+=arr[p]*15;
+                    char num5[10];
+                    sprintf(num5,"Goodday biscuit:%d\n",arr[p]);
+                    fputs(num5,filepointer);
+                    break;
+                case 5:
+                    printf("\nParle g biscuit(10): %d",arr[p]);
+                    Final+=arr[p]*10;
+                    char num6[10];
+                    sprintf(num6,"Parle g biscuit:%d\n",arr[p]);
+                    fputs(num6,filepointer);
+                    break;
+                case 6:
+                    printf("\nLUnibic cookies(50): %d",arr[p]);
+                    Final+=arr[p]*50;
+                    char num7[10];
+                    sprintf(num7,"Unibic cookies:%d\n",arr[p]);
+                    fputs(num7,filepointer);
+                    break;
+                case 7:
+                    printf("\nMixture 100g(60): %d",arr[p]);
+                    Final+=arr[p]*60;
+                    char num8[10];
+                    sprintf(num8,"Mixture:%d\n",arr[p]);
+                    fputs(num8,filepointer);
+                    break;
+                case 8:
+                    printf("\nBhujia 100g(40): %d",arr[p]);
+                    Final+=arr[p]*40;
+                    char num9[10];
+                    sprintf(num9,"Bhujia:%d\n",arr[p]);
+                    fputs(num9,filepointer);
+                    break;
+                }
+            }
+        }
+        printf("\n\nTotal Amount: %d RUPEES",Final);
+        printf("\n---------------------EXIT--------------------");
+        char final[20];
+        sprintf(final,"\n|Final amount: %d|",Final);
+        fputs(final,filepointer);
+        fclose(filepointer);
+
+        return 0;
+    }
